@@ -1,0 +1,116 @@
+<h3>Sign up</h3>
+<form>
+  <div class='form-group'>
+    <label class='control-label' for='signUpEmail' >Email address</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpEmail !== undefined }'
+      type='email'
+      placeholder='johndoe@gmail.com'
+      maxlength='254'
+      id='signUpEmail'
+      name='signUpEmail'
+      [(ngModel)]='signUpEmail'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpEmail }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpPassword1'>Password</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpPassword1 !== undefined }'
+      type='password'
+      placeholder='********'
+      maxlength='50'
+      id='signUpPassword1'
+      name='signUpPassword1'
+      [(ngModel)]='signUpPassword1'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpPassword1 }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpPassword2'>Reenter your password</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpPassword2 !== undefined }'
+      type='password'
+      placeholder='********'
+      maxlength='50'
+      id='signUpPassword2'
+      name='signUpPassword2'
+      [(ngModel)]='signUpPassword2'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpPassword2 }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpName'>Name</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpName !== undefined }'
+      type='text'
+      placeholder='John Doe'
+      maxlength='50'
+      id='signUpName'
+      name='signUpName'
+      [(ngModel)]='signUpName'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpName }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpPhone'>Phone number</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpPhone !== undefined }'
+      type='phone'
+      placeholder='12034567890'
+      maxlength='11'
+      id='signUpPhone'
+      name='signUpPhone'
+      [(ngModel)]='signUpPhone'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpPhone }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpAddress'>Home address</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpAddress !== undefined }'
+      type='text'
+      placeholder='52 Home Address Rd., Easton, CT 06612'
+      maxlength='256'
+      id='signUpAddress'
+      name='signUpAddress'
+      [(ngModel)]='signUpAddress'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpAddress }}</small>
+  </div>
+  <div class='form-group'>
+    <label class='control-label' for='signUpVolunteerKey'>Volunteer key</label>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpVolunteerKey !== undefined }'
+      type='text'
+      placeholder=''
+      maxlength='50'
+      id='signUpVolunteerKey'
+      name='signUpVolunteerKey'
+      [(ngModel)]='signUpVolunteerKey'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text text-muted'>If you are a registered Safe Rides volunteer, check your email for the key. If you are not a volunteer, you can safely ignore this field.</small>
+    <small class='form-text invalid-feedback'>{{ errors.signUpVolunteerKey }}</small>
+  </div>
+
+  <!-- privacy policy -->
+  <div class='form-group' id='privacyPolicyAccordian'>
+    <div class='card'>
+      <div class='card-header'>
+        <button type='button' class='btn btn-link' data-toggle='collapse' data-target='#privacyPolicyCollapse'>Privacy policy</button>
+      </div>
+      <div class='collapse' id='privacyPolicyCollapse' data-parent='#privacyPolicyAccordian'>
+        <div class='card-body'>
+          <p>We will never share your personal information except in the case of emergency (imminent harm to other people) or for official recordkeeping. Logs of information from all Safe Rides requests will be kept for official use. We will never see nor share your password.</p>
+          <p>The following information may be shared with on-duty volunteers when requesting a ride:</p>
+          <ul>
+            <li>Name</li>
+            <li>Phone number</li>
+            <li>Home address</li>
+            <li>Timestamps of picking up or dropping off people</li>
+          </ul>
+          <p>If you are a volunteer, you agree to receive text messages from Safe Rides notifying of duty times and Safe Rides requests when you are on-duty, or on non-standard times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <input class='btn btn-outline-primary' type='button' value='Sign up' id='signUpButton' (click)='signUp()'>
+  </div>
+</form>
+
+<p>Already have an account? <a routerLink='/signin'>Sign in</a>.</p>

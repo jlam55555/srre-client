@@ -1,0 +1,39 @@
+<div class='container'>
+
+  <!-- if signed in show profile -->
+  <div *ngIf='isSignedIn'>
+    <h4>Profile</h4>
+    <table class='table'>
+      <tbody>
+        <tr>
+          <th scope='row'>Email</th>
+          <td>{{ userDetails.email }}</td>
+        </tr>
+        <tr>
+          <th scope='row'>Name</th>
+          <td>{{ userDetails.name }}</td>
+        </tr>
+        <tr>
+          <th scope='row'>Phone</th>
+          <td>{{ userDetails.phone }}</td>
+        </tr>
+        <tr>
+          <th scope='row'>Address</th>
+          <td>{{ userDetails.address }}</td>
+        </tr>
+        <tr>
+          <th scope='row'>Volunteer team</th>
+          <td>{{ userDetails.team }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class='btn btn-outline-primary' (click)='signOut()'>Sign out</button>
+  </div>
+
+  <!-- sign in and sign up if user is not signed in -->
+  <div *ngIf='!isSignedIn'>
+    <app-sign-in *ngIf='isSignInForm'></app-sign-in>
+    <app-sign-up *ngIf='!isSignInForm'></app-sign-up>
+  </div>
+
+</div>

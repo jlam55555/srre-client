@@ -1,0 +1,13 @@
+<div class='container'>
+
+  <!-- if signed in -->
+  <div *ngIf='isSignedIn'>
+    <p>Coming soon. Return to the <a routerLink='/'>homepage</a>.</p>
+  </div>
+
+  <!-- if not signed in -->
+  <div *ngIf='!isSignedIn'>
+    <p>You must <a routerLink='/signin'>sign in</a> or <a routerLink='/signup'>sign up</a> and be registered to volunteer to see this content.</p>
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+<nav class='navbar navbar-expand-sm fixed-top navbar-dark bg-dark'>
+
+  <!-- page title -->
+  <div class='navbar-brand d-none d-sm-block'>Safe Rides</div>
+  <div class='navbar-brand d-block d-sm-none'>{{ pageTitle }}</div>
+
+  <!-- button to collapse navbar   -->
+  <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#mainNavbar'>
+    <span class='navbar-toggler-icon'></span>
+  </button>
+
+  <!-- navbar links -->
+  <div class='collapse navbar-collapse' id='mainNavbar'>
+    <div class='navbar-nav'>
+      <div [ngClass]='{ "nav-item": true, active: pageTitle === "Home" }'>
+        <a class='nav-link' routerLink='/'>Home</a>
+      </div>
+      <div [ngClass]='{ "nav-item": true, active: pageTitle === "Request" }'>
+        <a class='nav-link' routerLink='/request'>Request</a>
+      </div>
+      <div [ngClass]='{ "nav-item": true, active: pageTitle === "Volunteer" }'>
+        <a class='nav-link' routerLink='/volunteer'>Volunteer</a>
+      </div>
+      <div [ngClass]='{ "nav-item": true, active: pageTitle === "About" }'>
+        <a class='nav-link' routerLink='/about'>About</a>
+      </div>
+    </div>
+  </div>
+
+</nav>
