@@ -18,6 +18,7 @@ export class RequestComponent implements OnInit {
 
   // form fields
   public requestLocation: string = '';
+  public requestMessage: string = '';
 
   // form field errors
   public errors: any = {};
@@ -45,7 +46,7 @@ export class RequestComponent implements OnInit {
     };
     this.map = new google.maps.Map(this.addressMapElement.nativeElement, mapProperties);
 
-    // find place
+    // find place; client-side validation before server for convenience, will be repeated by server
     let service = new google.maps.places.PlacesService(this.map);
     service.nearbySearch({
       location: startLocation,
@@ -65,16 +66,29 @@ export class RequestComponent implements OnInit {
     });
   }
 
+  // request a ride
+  request() {
+    let requestData = {
+      location: this.requestLocation,
+      message: this.requestMessage
+    };
+    this.serverService.request(requestData, res => {
+      if(res === true) {
+        // don't have to do anything, should automatically update to mission screen
+      } else {
+        this.errors = res;
+      }
+    });
+  }
+
   // submit when enter pressed
   submitOnEnter(event: KeyboardEvent) {
-
     if(event.which === 13) {
-      // verify map
+      // update map
       this.updateMap();
-
-      // other verifications and submit
+      // request
+      this.request();
     }
-
   }
 
 }

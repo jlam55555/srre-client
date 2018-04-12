@@ -39,6 +39,11 @@ export class ServerService {
     return this.userDetailsSubject;
   }
 
+  // request a ride
+  public request(data, callback) {
+    this.socket.emit('request', data, callback);
+  }
+
   // sign in
   public signIn(data, callback) {
     this.socket.emit('signIn', data, res => {
