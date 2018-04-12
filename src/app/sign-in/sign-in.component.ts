@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageService } from '../page.service';
 import { ServerService } from '../server.service';
 
@@ -10,7 +10,9 @@ import { ServerService } from '../server.service';
 export class SignInComponent implements OnInit {
 
   constructor(private pageService: PageService, private serverService: ServerService) { }
-  ngOnInit() { }
+  ngOnInit() {
+    this.signInEmailElement.nativeElement.focus();
+  }
 
   // form fields
   public signInEmail: string = '';
@@ -19,6 +21,9 @@ export class SignInComponent implements OnInit {
 
   // errors for form validation
   public errors: any = {};
+
+  // sign in email element reference for
+  @ViewChild('signInEmailElement') signInEmailElement: any;
 
   // attempt sign in
   public signIn() {

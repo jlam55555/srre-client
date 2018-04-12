@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageService } from '../page.service';
 import { ServerService } from '../server.service';
 
@@ -10,7 +10,9 @@ import { ServerService } from '../server.service';
 export class SignUpComponent implements OnInit {
 
   constructor(private pageService: PageService, private serverService: ServerService) { }
-  ngOnInit() { }
+  ngOnInit() {
+    this.signUpEmailElement.nativeElement.focus();
+  }
 
   // form fields
   public signUpEmail: string = '';
@@ -23,6 +25,9 @@ export class SignUpComponent implements OnInit {
 
   // errors for validation
   public errors: any = {};
+
+  // reference to sign up email element for autofocus
+  @ViewChild('signUpEmailElement') signUpEmailElement: any;
 
   // attempt sign up
   public signUp() {

@@ -3,9 +3,13 @@
   <div class='form-group'>
     <label class='control-label' for='signInEmail'>Email address</label>
     <input [ngClass]='{ "form-control": true, "is-invalid": errors.signInEmail !== undefined }'
+      autofocus
       type='email'
       placeholder='johndoe@gmail.com'
       maxlength='254'
+      autocomplete='off'
+      autocorrect='off'
+      #signInEmailElement
       id='signInEmail'
       name='signInEmail'
       [(ngModel)]='signInEmail'
@@ -18,6 +22,8 @@
       type='password'
       placeholder='********'
       maxlength='50'
+      autocomplete='off'
+      autocorrect='off'
       id='signInPassword'
       name='signInPassword'
       [(ngModel)]='signInPassword'

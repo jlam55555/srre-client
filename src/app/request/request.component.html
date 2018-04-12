@@ -14,7 +14,11 @@
           <label class='control-label' for='requestLocation'>Current Location</label>
           <input
             [ngClass]='{ "form-control": true, "is-invalid": errors.requestLocation !== undefined }'
+            autofocus
             type='text'
+            maxlength='256'
+            autocomplete='off'
+            autocorrect='off'
             placeholder='100 Black Rock Tpke., Redding, CT 06896'
             id='requestLocation'
             name='requestLocation'
