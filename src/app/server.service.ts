@@ -36,7 +36,7 @@ export class ServerService {
   private missionDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
   public getMissionData() {
     this.socket.emit('getMissionData');
-    return this.userDetailsSubject;
+    return this.missionDataSubject;
   }
 
   // request a ride

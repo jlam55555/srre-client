@@ -6,7 +6,7 @@
     <!-- if mission, mission page; put on its own page because of its complexity -->
     <app-mission *ngIf='mission.id !== undefined'></app-mission>
 
-    <!-- if no mission, request page -->
+    <!-- if no mission, request page; might move to own component for simplicity -->
     <div *ngIf='mission.id === undefined'>
       <h4>Request a ride</h4>
       <form>
