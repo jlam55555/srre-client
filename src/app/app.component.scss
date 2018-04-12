@@ -1,0 +1,9 @@
+::ng-deep .jumbotron.jumbotron-fluid {
+  height: 450px;
+}
+@media only screen and (max-height: 750px) {
+  ::ng-deep .jumbotron.jumbotron-fluid { height: 225px; }
+}
+@media only screen and (max-height: 500px) {
+  ::ng-deep .jumbotron.jumbotron-fluid { height: 150px; }
+}
