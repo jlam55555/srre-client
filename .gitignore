@@ -2,6 +2,7 @@
 
 # building the output
 build.bat
+build-dev.bat
 
 # compiled output
 /dist
