@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageService } from '../page.service';
 import { ServerService } from '../server.service';
 
 @Component({
@@ -8,13 +9,16 @@ import { ServerService } from '../server.service';
 })
 export class MissionComponent implements OnInit {
 
-  constructor(private serverService: ServerService) { }
+  constructor(private pageService: PageService, private serverService: ServerService) { }
 
   // mission data
   public mission: any = {};
 
   ngOnInit() {
     this.serverService.getMissionData().subscribe(missionData => this.mission = missionData);
+
+    // configure card  collapse indicators
+    this.pageService.collapseIndicators();
   }
 
 }

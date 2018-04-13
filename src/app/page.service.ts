@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+declare let $: any;
 
 @Injectable()
 export class PageService {
@@ -31,6 +32,17 @@ export class PageService {
   }
   public setIsSignInForm(isSignInForm: boolean) {
     this.isSignInFormSubject.next(isSignInForm);
+  }
+
+  // collapse indicators
+  // initCollapseIndicators can be called if the view changes
+  public initCollapseIndicators() {
+    $('.card .collapse:not(.show)').each(function() { console.log($(this).prev()); $(this).prev().addClass('hidden'); });
+  }
+  public collapseIndicators() {
+    this.initCollapseIndicators();
+    $(document).on('hide.bs.collapse', '.card .collapse', function() { $(this).prev().addClass('hidden'); });
+    $(document).on('show.bs.collapse', '.card .collapse', function() { $(this).prev().removeClass('hidden'); });
   }
 
 }

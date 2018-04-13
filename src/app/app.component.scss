@@ -7,3 +7,20 @@
 @media only screen and (max-height: 500px) {
   ::ng-deep .jumbotron.jumbotron-fluid { height: 150px; }
 }
+
+// indicate expandable cards
+::ng-deep .card-header {
+
+  // up chevron when shown
+  a::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    float: right;
+    content: ' \f0d8';
+  }
+
+  // down chevron when hidden
+  &.hidden a::after {
+    content: ' \f0d7';
+  }
+}

@@ -12,6 +12,9 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.pageService.setPageTitle('About');
+
+    // configure collapse indicators
+    this.pageService.collapseIndicators();
   }
 
 }

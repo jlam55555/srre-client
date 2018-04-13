@@ -12,6 +12,9 @@ export class SignUpComponent implements OnInit {
   constructor(private pageService: PageService, private serverService: ServerService) { }
   ngOnInit() {
     this.signUpEmailElement.nativeElement.focus();
+
+    // configure collapse indicators
+    this.pageService.collapseIndicators();
   }
 
   // form fields

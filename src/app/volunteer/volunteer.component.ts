@@ -23,7 +23,11 @@ export class VolunteerComponent implements OnInit {
     this.serverService.getUserDetails().subscribe(newUserDetails => {
       this.volunteerTeam = newUserDetails.team;
       this.isVolunteer = newUserDetails.team !== null;
+      this.pageService.initCollapseIndicators();
     });
+
+    // configure card chevron indicators
+    this.pageService.collapseIndicators();
   }
 
 }
