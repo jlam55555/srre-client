@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-mission',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MissionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serverService: ServerService) { }
+
+  // mission data
+  public mission: any = {};
 
   ngOnInit() {
+    this.serverService.getMissionData().subscribe(missionData => this.mission = missionData);
   }
 
 }

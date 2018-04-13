@@ -1,3 +1,82 @@
-<p>
-  mission works!
-</p>
+<!-- already contained within .container, no need to wrap in one -->
+
+<!-- message and involved people -->
+<div class='jumbotron my-2'>
+  <h4>Request message:</h4>
+  <p>{{ mission.situation || 'No message was given by the ride requester.' }}</p>
+  <table class='table'>
+    <tbody>
+      <tr>
+        <th for='row'>Requester</th>
+        <td>{{ mission.drivee }}</td>
+      </tr>
+      <tr>
+        <th for='row'>Driver 1</th>
+        <td>{{ mission.driver1 || 'Not selected yet' }}</td>
+      </tr>
+      <tr>
+        <th for='row'>Driver 2</th>
+        <td>{{ mission.driver2 || 'Not selected yet' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- flexbox for positioning -->
+<div class='row'>
+
+  <!-- times -->
+  <div class='col-xl-4'>
+    <div class='card my-2'>
+      <div class='card-header bg-secondary'>
+        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionTimesCollapse'>Times</a>
+      </div>
+      <div class='collapse' id='missionTimesCollapse'>
+        <ul class='list-group list-group-fluid'>
+          <li class='list-group-item'>Leave from meeting place.</li>
+          <li class='list-group-item'>Pick up requester.</li>
+          <li class='list-group-item'>Drop off requester.</li>
+          <li class='list-group-item'>Return to starting place</li>
+        </ul>
+      </div>
+      <div class='card-footer'>
+        Next time: (next time goes here)
+      </div>
+    </div>
+  </div>
+
+  <!-- directions and map -->
+  <div class='col-xl-4 col-md-6'>
+    <div class='card my-2'>
+      <div class='card-header bg-secondary'>
+        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionDirectionsCollapse'>Directions</a>
+      </div>
+      <div class='collapse' id='missionDirectionsCollapse'>
+        <div class='card-body'>
+          (Map will go here)
+        </div>
+      </div>
+      <div class='card-footer'>
+        <a target='_blank' href='{{ mission.url }}'>Google Maps directions</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- chat -->
+  <div class='col-xl-4 col-md-6'>
+    <div class='card my-2'>
+      <div class='card-header bg-secondary'>
+        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionChatCollapse'>Chat</a>
+      </div>
+      <div class='collapse' id='missionChatCollapse'>
+        <div class='card-body'>
+          (Chat will go here.)
+        </div>
+      </div>
+      <div class='card-footer'>
+        Make sure never to use your phone while driving.
+      </div>
+    </div>
+  </div>
+
+</div>
