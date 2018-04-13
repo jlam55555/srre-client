@@ -2,7 +2,72 @@
 
   <!-- if signed in -->
   <div *ngIf='isSignedIn'>
-    <p>Coming soon. Return to the <a routerLink='/'>homepage</a>.</p>
+
+    <!-- if a volunteer good -->
+    <div *ngIf='isVolunteer'>
+
+      <h4>Volunteer</h4>
+
+      <!-- on duty requests -->
+      <div class='card my-2'>
+        <div class='card-header bg-secondary'>
+          <a class='text-white' href='#' data-toggle='collapse' data-target='#volunteerOnDutyCollapse'>On Duty Requests</a>
+        </div>
+        <div class='collapse show' id='volunteerOnDutyCollapse'>
+          <div class='card'>
+            <div class='table-responsive'>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th class='text-nowrap' scope='col'>Requester</th>
+                    <th class='text-nowrap' scope='col'>Pick up address</th>
+                    <th class='text-nowrap' scope='col'>Home address</th>
+                    <th class='text-nowrap' scope='col'>Situation</th>
+                    <th class='text-nowrap' scope='col'>Volunteer?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- add stuff here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- off-duty requests (coming soon) -->
+      <!-- just copy on-duty requests, different server side -->
+
+      <!-- duty dates here -->
+      <div class='card my-2'>
+        <div class='card-header bg-secondary'>
+          <a class='text-white' href='#' data-toggle='collapse' data-target='#volunteerDatesCollapse'>Volunteer Dates</a>
+        </div>
+        <div class='collapse' id='volunteerDatesCollapse'>
+          <div class='card-body'>
+            <table class='table'>
+              <thead>
+                <tr>
+                  <th scope='col'>Date</th>
+                  <th scope='col'>Supervisor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- fill in stuff here -->
+              </tbody>
+            </table>
+            <p>For more information, see the &quot;Volunteer Information&quot; tab on the <a routerLink='/about'>about</a> page.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- if not a volunteer -->
+    <div *ngIf='!isVolunteer'>
+      <p>You must be registered as a volunteer. Contact a <a routerLink='/about'>Safe Rides leader</a> to register.</p>
+    </div>
+
   </div>
 
   <!-- if not signed in -->
