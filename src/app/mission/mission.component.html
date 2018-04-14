@@ -23,6 +23,7 @@
 </div>
 
 <!-- flexbox for positioning -->
+<!-- add when volunteering possible: *ngIf='mission.driver1 !== null && mission.driver2 !== null' -->
 <div class='row'>
 
   <!-- times -->
@@ -33,14 +34,37 @@
       </div>
       <div class='collapse' id='missionTimesCollapse'>
         <ul class='list-group list-group-fluid'>
-          <li class='list-group-item'>Leave from meeting place.</li>
-          <li class='list-group-item'>Pick up requester.</li>
-          <li class='list-group-item'>Drop off requester.</li>
-          <li class='list-group-item'>Return to starting place</li>
+
+          <!-- repeat for every waypoint -->
+          <li class='list-group-item text-center' *ngFor='let w of mission.w'>
+
+            <!-- icon for waypoint -->
+            <h4><i [ngClass]='{ "fas p-1 text-white rounded-circle": true, "bg-success fa-check": w.time !== null, "bg-info fa-car": w.next, "bg-danger fa-clock": w.time === null && !w.next }'></i></h4>
+
+            <!-- description text of waypoint -->
+            <p>{{ w.text }}</p>
+
+            <!-- address of waypoint -->
+            <p class='text-secondary small'>{{ w.place }}</p>
+
+            <!-- time when completed (if completed) -->
+            <p class='text-info' *ngIf='w.time !== null'>Time completed: {{ w.time }}</p>
+
+            <!-- button to confirm if you can confirm and if this is next option -->
+            <button class='btn btn-outline-info' *ngIf='w.next && w.isConfirmRole'>Done!</button>
+          </li>
         </ul>
       </div>
-      <div class='card-footer'>
-        Next time: (next time goes here)
+
+      <!-- footer shows next stop and confirm button if applicable -->
+      <div class='card-footer text-center'>
+        <h6>Next stop</h6>
+
+        <!-- description text -->
+        <p>{{ mission.w[mission.nextId].text }}</p>
+
+        <!-- button to confirm if you can confirm and if this is next option -->
+        <button class='btn btn-outline-info' *ngIf='mission.w[mission.nextId].next && mission.w[mission.nextId].isConfirmRole'>Done!</button>
       </div>
     </div>
   </div>
