@@ -37,7 +37,7 @@ export class PageService {
   // collapse indicators
   // initCollapseIndicators can be called if the view changes
   public initCollapseIndicators() {
-    $('.card .collapse:not(.show)').each(function() { console.log($(this).prev()); $(this).prev().addClass('hidden'); });
+    $('.card .collapse:not(.show)').each(function() { $(this).prev().addClass('hidden'); });
   }
   public collapseIndicators() {
     this.initCollapseIndicators();
