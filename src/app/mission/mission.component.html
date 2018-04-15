@@ -22,6 +22,9 @@
   </table>
 </div>
 
+<!-- errors -->
+<div class='text-danger'>{{ errors.mission }}</div>
+
 <!-- flexbox for positioning -->
 <!-- add when volunteering possible: *ngIf='mission.driver1 !== null && mission.driver2 !== null' -->
 <div class='row'>
@@ -36,7 +39,7 @@
         <ul class='list-group list-group-fluid'>
 
           <!-- repeat for every waypoint -->
-          <li class='list-group-item text-center' *ngFor='let w of mission.w'>
+          <li class='list-group-item text-center' *ngFor='let w of mission.waypoints'>
 
             <!-- icon for waypoint -->
             <h4><i [ngClass]='{ "fas p-1 text-white rounded-circle": true, "bg-success fa-check": w.time !== null, "bg-info fa-car": w.next, "bg-danger fa-clock": w.time === null && !w.next }'></i></h4>
@@ -44,14 +47,16 @@
             <!-- description text of waypoint -->
             <p>{{ w.text }}</p>
 
-            <!-- address of waypoint -->
-            <p class='text-secondary small'>{{ w.place }}</p>
-
-            <!-- time when completed (if completed) -->
-            <p class='text-info' *ngIf='w.time !== null'>Time completed: {{ w.time }}</p>
+            <!-- address of waypoint and time if completed -->
+            <p class='text-secondary small'>
+              {{ w.place }}
+              <span *ngIf='w.time !== null'>
+                <br>Time completed: {{ w.time }}
+              </span>
+            </p>
 
             <!-- button to confirm if you can confirm and if this is next option -->
-            <button class='btn btn-outline-info' *ngIf='w.next && w.isConfirmRole'>Done!</button>
+            <button class='btn btn-outline-info' *ngIf='w.next && w.isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
           </li>
         </ul>
       </div>
@@ -61,10 +66,10 @@
         <h6>Next stop</h6>
 
         <!-- description text -->
-        <p>{{ mission.w[mission.nextId].text }}</p>
+        <p>{{ mission.waypoints[mission.nextId].text }}</p>
 
         <!-- button to confirm if you can confirm and if this is next option -->
-        <button class='btn btn-outline-info' *ngIf='mission.w[mission.nextId].next && mission.w[mission.nextId].isConfirmRole'>Done!</button>
+        <button class='btn btn-outline-info' *ngIf='mission.waypoints[mission.nextId].next && mission.waypoints[mission.nextId].isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
       </div>
     </div>
   </div>

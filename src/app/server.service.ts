@@ -34,9 +34,14 @@ export class ServerService {
 
   // get mission details; event handler to update missiondata in constructor
   private missionDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  public getMissionData() {
+  public getMissionData(): BehaviorSubject<any> {
     this.socket.emit('getMissionData');
     return this.missionDataSubject;
+  }
+
+  // mission data go to next checkpoint
+  public completeCheckpoint(data: any, callback: Function): void {
+    this.socket.emit('completeCheckpoint', data, callback);
   }
 
   // request a ride
