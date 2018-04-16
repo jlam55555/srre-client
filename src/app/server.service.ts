@@ -20,6 +20,7 @@ export class ServerService {
 
     // separate event handler because it may be called multiple times by server-side requests
     this.socket.on('missionData', missionData => this.missionDataSubject.next(missionData));
+    this.socket.on('missionListData', missionListData => this.missionListDataSubject.next(missionListData));
   }
 
   // get user details
@@ -44,9 +45,21 @@ export class ServerService {
     this.socket.emit('completeCheckpoint', data, callback);
   }
 
+  // get mission list data; event handler to update missionListData in constructor
+  public missionListDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({ onDuty: [], offDuty: [] });
+  public getMissionListData(): BehaviorSubject<any> {
+    this.socket.emit('getMissionListData');
+    return this.missionListDataSubject;
+  }
+
   // request a ride
   public request(data, callback) {
     this.socket.emit('request', data, callback);
+  }
+
+  // volunteer for a ride
+  public volunteer(data, callback) {
+    this.socket.emit('volunteer', data, callback);
   }
 
   // sign in

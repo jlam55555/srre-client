@@ -8,6 +8,9 @@
 
       <h4>Volunteer</h4>
 
+      <!-- get mission list data errors -->
+      <div class='text-danger'>{{ errors.volunteerMissionList }}</div>
+
       <!-- on duty requests -->
       <div class='card my-2'>
         <div class='card-header bg-secondary'>
@@ -19,15 +22,39 @@
               <table class='table'>
                 <thead>
                   <tr>
-                    <th class='text-nowrap' scope='col'>Requester</th>
-                    <th class='text-nowrap' scope='col'>Pick up address</th>
-                    <th class='text-nowrap' scope='col'>Home address</th>
-                    <th class='text-nowrap' scope='col'>Situation</th>
-                    <th class='text-nowrap' scope='col'>Volunteer?</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Requester</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Pick up address</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Home address</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Situation</th>
+                    <th class='text-nowrap' scope='col' colspan='4'>Checkpoints</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Driver 1</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Driver 2</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Volunteer?</th>
+                  </tr>
+                  <tr>
+                    <th class='text-nowrap' scope='col'>0</th>
+                    <th class='text-nowrap' scope='col'>1</th>
+                    <th class='text-nowrap' scope='col'>2</th>
+                    <th class='text-nowrap' scope='col'>3</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- add stuff here -->
+                  <tr *ngIf='missions.onDuty.length === 0'>
+                    <td colspan='11'>No on-duty rides requests are currently open.</td>
+                  </tr>
+                  <tr *ngFor='let mission of missions.onDuty'>
+                    <td>{{ mission.drivee }}</td>
+                    <td>{{ mission.startplace }}</td>
+                    <td>{{ mission.endplace }}</td>
+                    <td>{{ mission.situation || 'No request situation was given.' }}</td>
+                    <td><i [ngClass]='{ "fas": true, "fa-clock text-danger": mission.w0 === null, "fa-check text-success": mission.w0 !== null }'></i></td>
+                    <td><i [ngClass]='{ "fas": true, "fa-clock text-danger": mission.w1 === null, "fa-check text-success": mission.w1 !== null }'></i></td>
+                    <td><i [ngClass]='{ "fas": true, "fa-clock text-danger": mission.w2 === null, "fa-check text-success": mission.w2 !== null }'></i></td>
+                    <td><i [ngClass]='{ "fas": true, "fa-clock text-danger": mission.w3 === null, "fa-check text-success": mission.w3 !== null }'></i></td>
+                    <td>{{ mission.driver1 }}</td>
+                    <td>{{ mission.driver2 }}</td>
+                    <td><button *ngIf='mission.isEligible' class='btn btn-outline-primary' (click)='volunteer(mission.id)'>Volunteer?</button></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
