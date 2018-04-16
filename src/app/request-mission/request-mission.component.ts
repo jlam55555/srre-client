@@ -3,11 +3,11 @@ import { PageService } from '../page.service';
 import { ServerService } from '../server.service';
 
 @Component({
-  selector: 'app-mission',
-  templateUrl: './mission.component.html',
-  styleUrls: ['./mission.component.scss']
+  selector: 'app-request-mission',
+  templateUrl: './request-mission.component.html',
+  styleUrls: ['./request-mission.component.scss']
 })
-export class MissionComponent implements OnInit {
+export class RequestMissionComponent implements OnInit {
 
   constructor(private pageService: PageService, private serverService: ServerService) { }
 

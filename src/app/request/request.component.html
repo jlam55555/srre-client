@@ -3,53 +3,11 @@
   <!-- if signed in -->
   <div *ngIf='isSignedIn'>
 
-    <!-- if mission, mission page; put on its own page because of its complexity -->
-    <app-mission *ngIf='mission.id !== undefined'></app-mission>
+    <!-- if mission, mission page -->
+    <app-request-mission *ngIf='mission.id !== undefined'></app-request-mission>
 
-    <!-- if no mission, request page; might move to own component for simplicity -->
-    <div *ngIf='mission.id === undefined'>
-      <h4>Request a ride</h4>
-      <form>
-        <div class='form-group'>
-          <label class='control-label' for='requestLocation'>Current Location</label>
-          <input
-            [ngClass]='{ "form-control": true, "is-invalid": errors.requestLocation !== undefined }'
-            autofocus
-            type='text'
-            maxlength='256'
-            autocomplete='off'
-            autocorrect='off'
-            placeholder='100 Black Rock Tpke., Redding, CT 06896'
-            id='requestLocation'
-            name='requestLocation'
-            [(ngModel)]='requestLocation'
-            (blur)='updateMap()'
-            (keydown)='submitOnEnter($event)'>
-          <small class='form-text invalid-feedback'>{{ errors.requestLocation }}</small>
-        </div>
-        <div class='form-group'>
-          <small class='form-text'>Please confirm that the location found is correct using the map below.</small>
-          <div class='jumbotron jumbotron-fluid' #addressMap></div>
-        </div>
-        <div class='form-group'>
-          <label class='control-label' for='requestMessage'>Message to Safe Rides Volunteers</label>
-          <input
-            class='form-control'
-            type='text'
-            placeholder='I feel unsafe and would like a safe, confidential ride home.'
-            id='requestMessage'
-            name='requestMessage'
-            [(ngModel)]='requestMessage'>
-        </div>
-        <div class='form-group'>
-          <input
-            class='btn btn-outline-primary'
-            type='button'
-            value='Request a Safe Ride'
-            (click)='request()'>
-        </div>
-      </form>
-    </div>
+    <!-- if no mission, request page -->
+    <app-request-form *ngIf='mission.id === undefined'></app-request-form>
 
   </div>
 

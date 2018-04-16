@@ -17,11 +17,12 @@ import { AboutComponent } from './about/about.component'
 import { HeaderComponent } from './header/header.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { RequestMissionComponent } from './request-mission/request-mission.component';
+import { RequestFormComponent } from './request-form/request-form.component';
 
 // services
 import { PageService } from './page.service';
 import { ServerService } from './server.service';
-import { MissionComponent } from './mission/mission.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MissionComponent } from './mission/mission.component';
     SignInComponent,
     SignUpComponent,
     AboutComponent,
-    MissionComponent
+    RequestMissionComponent,
+    RequestFormComponent
   ],
   imports: [
     BrowserModule,
