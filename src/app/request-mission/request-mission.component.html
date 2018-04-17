@@ -51,7 +51,7 @@
             <p class='text-secondary small'>
               {{ w.place }}
               <span *ngIf='w.time !== null'>
-                <br>Time completed: {{ w.time }}
+                <br>Time completed: {{ w.time | date:'shortTime' }}
               </span>
             </p>
 
@@ -105,7 +105,16 @@
           </li>
         </ul>
         <div class='row mx-0'>
-          <input class='col-9 rounded-0' type='text' placeholder='message' name='missionMessage' [(ngModel)]='missionMessage' (keydown)='submitOnEnter($event)' />
+          <input
+            class='col-9 rounded-0'
+            type='text'
+            maxlength='500'
+            autocomplete='off'
+            autocorrect='off'
+            placeholder='Send a message...'
+            name='missionMessage'
+            [(ngModel)]='missionMessage'
+            (keydown)='submitOnEnter($event)' />
           <input class='btn btn-outline-primary col-3 rounded-0' type='button' value='Send' (click)='sendMessage()'>
         </div>
       </div>
