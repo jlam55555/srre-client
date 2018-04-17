@@ -21,6 +21,7 @@ export class ServerService {
     // separate event handler because it may be called multiple times by server-side requests
     this.socket.on('missionData', missionData => this.missionDataSubject.next(missionData));
     this.socket.on('missionListData', missionListData => this.missionListDataSubject.next(missionListData));
+    this.socket.on('messagesData', messagesData => this.missionMessagesSubject.next(messagesData));
   }
 
   // get user details
@@ -50,6 +51,18 @@ export class ServerService {
   public getMissionListData(): BehaviorSubject<any> {
     this.socket.emit('getMissionListData');
     return this.missionListDataSubject;
+  }
+
+  // send observable for messages
+  private missionMessagesSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public getMessages(): BehaviorSubject<any> {
+    this.socket.emit('getMessagesData');
+    return this.missionMessagesSubject;
+  }
+
+  // send message
+  public sendMessage(data: any, callback: Function): void {
+    this.socket.emit('sendMessage', data, callback);
   }
 
   // request a ride

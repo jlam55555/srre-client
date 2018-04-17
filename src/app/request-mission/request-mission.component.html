@@ -98,8 +98,15 @@
         <a class='text-white' href='#' data-toggle='collapse' data-target='#missionChatCollapse'>Chat</a>
       </div>
       <div class='collapse' id='missionChatCollapse'>
-        <div class='card-body'>
-          (Chat will go here.)
+        <ul class='list-group list-group-fluid' id='missionMessages' #missionMessages>
+          <li class='list-group-item' *ngFor='let message of messages'>
+            <small class='d-block text-secondary'>{{ message.author }} - {{ message.time | date:'shortTime' }}</small>
+            <p>{{ message.content }}</p>
+          </li>
+        </ul>
+        <div class='row mx-0'>
+          <input class='col-9 rounded-0' type='text' placeholder='message' name='missionMessage' [(ngModel)]='missionMessage' (keydown)='submitOnEnter($event)' />
+          <input class='btn btn-outline-primary col-3 rounded-0' type='button' value='Send' (click)='sendMessage()'>
         </div>
       </div>
       <div class='card-footer'>
