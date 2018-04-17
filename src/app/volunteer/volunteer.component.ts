@@ -31,7 +31,7 @@ export class VolunteerComponent implements OnInit {
     this.pageService.getIsSignedIn().subscribe(newIsSignedIn => this.isSignedIn = newIsSignedIn);
     this.serverService.getUserDetails().subscribe(newUserDetails => {
       this.volunteerTeam = newUserDetails.team;
-      this.isVolunteer = newUserDetails.team !== null;
+      this.isVolunteer = newUserDetails.team !== undefined;
       this.pageService.initCollapseIndicators();
     });
     this.serverService.getMissionListData().subscribe(newMissionListData => this.missions = newMissionListData);

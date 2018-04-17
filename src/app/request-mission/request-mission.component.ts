@@ -27,6 +27,7 @@ export class RequestMissionComponent implements OnInit {
 
       // scroll to bottom of messages
       this.missionMessagesElement.nativeElement.scrollTop = 10000;
+      setTimeout(() => this.missionMessagesElement.nativeElement.scrollTop = 10000, 50);
     });
 
     // configure card  collapse indicators

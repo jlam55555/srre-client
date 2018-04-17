@@ -99,9 +99,10 @@
       </div>
       <div class='collapse' id='missionChatCollapse'>
         <ul class='list-group list-group-fluid' id='missionMessages' #missionMessages>
+          <p class='m-3 text-center' *ngIf='messages.length === 0'>No messages have been sent yet.</p>
           <li class='list-group-item' *ngFor='let message of messages'>
             <small class='d-block text-secondary'>{{ message.author }} - {{ message.time | date:'shortTime' }}</small>
-            <p>{{ message.content }}</p>
+            <div>{{ message.content }}</div>
           </li>
         </ul>
         <div class='row mx-0'>
