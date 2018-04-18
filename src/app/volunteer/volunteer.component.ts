@@ -26,15 +26,26 @@ export class VolunteerComponent implements OnInit {
   // errors
   public errors: any = { };
 
+  // show duty dates
+  public teamData: any = { dates: [] };
+
   ngOnInit() {
     this.pageService.setPageTitle('Volunteer');
     this.pageService.getIsSignedIn().subscribe(newIsSignedIn => this.isSignedIn = newIsSignedIn);
     this.serverService.getUserDetails().subscribe(newUserDetails => {
       this.volunteerTeam = newUserDetails.team;
-      this.isVolunteer = newUserDetails.team !== undefined;
+      this.isVolunteer = newUserDetails.team !== null;
       this.pageService.initCollapseIndicators();
     });
     this.serverService.getMissionListData().subscribe(newMissionListData => this.missions = newMissionListData);
+
+    // get duty dates -- static data
+    this.serverService.getDutyDates(res => {
+      // this doesn't have error reporting because it theoretically shouldn't go wrong
+      if(res !== false) {
+        this.teamData = res;
+      }
+    });
 
     // configure card chevron indicators
     this.pageService.collapseIndicators();

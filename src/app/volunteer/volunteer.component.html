@@ -72,6 +72,8 @@
         </div>
         <div class='collapse' id='volunteerDatesCollapse'>
           <div class='card-body'>
+            <h6>Team: {{ teamData.name }}</h6>
+            <h6>Captain: {{ teamData.captain }}</h6>
             <table class='table'>
               <thead>
                 <tr>
@@ -80,9 +82,13 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- fill in stuff here -->
+                <tr *ngFor='let date of teamData.dates'>
+                  <td>{{ date.date }}</td>
+                  <td>{{ date.adult || 'none assigned' }}</td>
+                </tr>
               </tbody>
             </table>
+            <p>The volunteer dates are subject to change. These dates may not take into account recent changes to the schedule. To get the most up-to-date schedule, contact a <a routerLink='/about'>Safe Rides leader</a>.</p>
             <p>For more information, see the &quot;Volunteer Information&quot; tab on the <a routerLink='/about'>about</a> page.</p>
           </div>
         </div>

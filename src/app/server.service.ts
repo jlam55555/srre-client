@@ -75,6 +75,12 @@ export class ServerService {
     this.socket.emit('volunteer', data, callback);
   }
 
+  // duty dates
+  // no data input required
+  public getDutyDates(callback: Function) {
+    this.socket.emit('getDutyDates', callback);
+  }
+
   // sign in
   public signIn(data, callback) {
     this.socket.emit('signIn', data, res => {
