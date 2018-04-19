@@ -8,7 +8,7 @@
     <h4>Profile</h4>
 
     <!-- edit user details -->
-    <div class='modal' id='editModal' tabindex='-1' role='dialog'>
+    <div class='modal' id='editModal' tabindex='-1' role='dialog' #editModal>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
           <div class='modal-header'>
@@ -68,8 +68,8 @@
             </table>
           </div>
           <div class='modal-footer'>
-            <input class='btn btn-outline-danger' type='button' value='Edit {{ changeField }}'>
-            <input class='btn btn-outline-secondary' type='button' data-dismiss='modal' value='Cancel'>
+            <input class='btn btn-outline-danger' type='button' (click)='submitEdit()' value='Edit {{ changeField }}'>
+            <input class='btn btn-outline-secondary' type='button' (click)='edit(null)' data-dismiss='modal' value='Cancel'>
           </div>
         </div>
       </div>

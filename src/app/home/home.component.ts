@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../server.service';
 import { PageService } from '../page.service';
+declare let $: any;
 
 @Component({
   selector: 'app-home',
@@ -44,12 +45,37 @@ export class HomeComponent implements OnInit {
   public changeFieldCurrentPassword: string = '';
 
   // open up user detail change table
-  // TODO: working here; trigger this with new buttons
+  // cancel edit by calling this with null
   public edit(field: string) {
     this.changeFieldValue = '';
     this.changeFieldPassword = '';
     this.changeFieldCurrentPassword = '';
     this.changeField = field;
+  }
+
+  // errors for changing user detail
+  public errors: any = { };
+
+  // submit edit
+  @ViewChild('editModal') editModalElement: any;
+  public submitEdit() {
+    let data: any = {
+      field: this.changeField,
+      value: this.changeFieldValue,
+      password: this.changeFieldCurrentPassword
+    };
+    if(this.changeField === 'password') {
+      data.password2 = this.changeFieldPassword;
+    }
+    this.serverService.editUserField(data, res => {
+      if(res === true) {
+        // if successful, clear and hide
+        this.edit(null);
+        $(this.editModalElement.nativeElement).modal('hide');
+      } else {
+        this.errors = res;
+      }
+    });
   }
 
   // sign out button

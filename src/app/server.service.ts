@@ -34,6 +34,11 @@ export class ServerService {
     return this.userDetailsSubject;
   }
 
+  // change user detail
+  public editUserField(data: any, callback: Function): void {
+    this.socket.emit('editUserField', data, callback);
+  }
+
   // get mission details; event handler to update missiondata in constructor
   private missionDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
   public getMissionData(): BehaviorSubject<any> {
