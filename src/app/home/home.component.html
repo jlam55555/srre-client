@@ -16,56 +16,49 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
           </div>
           <div class='modal-body'>
-            <table class='table table-sm'>
-              <tbody>
-                <tr>
-                  <th class='border-0' scope='row'><label for='changeField'>Enter new {{ changeField }}</label></th>
-                  <!-- TODO: fix type, maxlength based on input type -->
-                  <td class='border-0'>
-                    <input
-                      class='form-control'
-                      id='changeField'
-                      name='changeFieldValue'
-                      [(ngModel)]='changeFieldValue'
-                      [type]='changeField === "password" ? "password" : "text"'
-                      autocorrect='off'
-                      autocomplete='off'
-                      maxlength='256'
-                      placeholder='new {{ changeField }}'>
-                  </td>
-                </tr>
-                <tr *ngIf='changeField === "password"'>
-                  <th class='border-0' scope='row'><label for='changeFieldPassword'>Enter new password again</label></th>
-                  <td class='border-0'>
-                    <input
-                      class='form-control'
-                      id='changeFieldPassword'
-                      name='changeFieldPassword'
-                      [(ngModel)]='changeFieldPassword'
-                      type='password'
-                      autocorrect='off'
-                      autocomplete='off'
-                      maxlength='256'
-                      placeholder='new password again'>
-                  </td>
-                </tr>
-                <tr>
-                  <th class='border-0' scope='row'><label for='changeFieldCurrentPassword'>Enter current password</label></th>
-                  <td class='border-0'>
-                    <input
-                      class='form-control'
-                      id='changeFieldCurrentPassword'
-                      name='changeFieldCurrentPassword'
-                      [(ngModel)]='changeFieldCurrentPassword'
-                      type='password'
-                      autocorrect='off'
-                      autocomplete='off'
-                      maxlength='256'
-                      placeholder='current password'>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class='form-group'>
+              <label for='changeField'>Enter new {{ changeField }}</label>
+              <!-- TODO: fix type, maxlength based on input type -->
+              <input
+                [ngClass]='{ "form-control": true, "is-invalid": errors.changeFieldValue !== undefined }'
+                id='changeField'
+                name='changeFieldValue'
+                [(ngModel)]='changeFieldValue'
+                [type]='changeField === "password" ? "password" : "text"'
+                autocorrect='off'
+                autocomplete='off'
+                maxlength='256'
+                placeholder='new {{ changeField }}'>
+              <small class='form-text invalid-feedback'>{{ errors.changeFieldValue }}</small>
+            </div>
+            <div class='form-group' *ngIf='changeField === "password"'>
+              <label for='changeFieldPassword'>Enter new password again</label>
+              <input
+                [ngClass]='{ "form-control": true, "is-invalid": errors.changeFieldPassword !== undefined }'
+                id='changeFieldPassword'
+                name='changeFieldPassword'
+                [(ngModel)]='changeFieldPassword'
+                type='password'
+                autocorrect='off'
+                autocomplete='off'
+                maxlength='256'
+                placeholder='new password again'>
+              <small class='form-text invalid-feedback'>{{ errors.changeFieldPassword }}</small>
+            </div>
+            <div class='form-group'>
+              <label for='changeFieldCurrentPassword'>Enter current password</label>
+              <input
+                [ngClass]='{ "form-control": true, "is-invalid": errors.changeFieldCurrentPassword !== undefined }'
+                id='changeFieldCurrentPassword'
+                name='changeFieldCurrentPassword'
+                [(ngModel)]='changeFieldCurrentPassword'
+                type='password'
+                autocorrect='off'
+                autocomplete='off'
+                maxlength='256'
+                placeholder='current password'>
+              <small class='form-text invalid-feedback'>{{ errors.changeFieldCurrentPassword }}</small>
+            </div>
           </div>
           <div class='modal-footer'>
             <input class='btn btn-outline-danger' type='button' (click)='submitEdit()' value='Edit {{ changeField }}'>
@@ -92,7 +85,7 @@
           <tr>
             <th scope='row'>Phone</th>
             <td>{{ userDetails.phone }}</td>
-            <td><button class='btn btn-outline-danger' (click)='edit("phone")' data-toggle='modal' data-target='#editModal'>Edit</button></td>
+            <td><button class='btn btn-outline-danger' (click)='edit("phone number")' data-toggle='modal' data-target='#editModal'>Edit</button></td>
           </tr>
           <tr>
             <th scope='row'>Address</th>

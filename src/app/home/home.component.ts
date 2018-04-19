@@ -47,9 +47,13 @@ export class HomeComponent implements OnInit {
   // open up user detail change table
   // cancel edit by calling this with null
   public edit(field: string) {
+    // reset values and errors
     this.changeFieldValue = '';
     this.changeFieldPassword = '';
     this.changeFieldCurrentPassword = '';
+    this.errors = { };
+
+    // update field to change (setting to null clears it)
     this.changeField = field;
   }
 
