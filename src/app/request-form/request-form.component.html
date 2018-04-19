@@ -13,8 +13,7 @@
       id='requestLocation'
       name='requestLocation'
       [(ngModel)]='requestLocation'
-      (blur)='updateMap()'
-      (keydown)='submitOnEnter($event)'>
+      (blur)='updateMap()'>
     <small class='form-text invalid-feedback'>{{ errors.requestLocation }}</small>
   </div>
   <div class='form-group'>

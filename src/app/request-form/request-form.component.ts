@@ -34,13 +34,14 @@ export class RequestFormComponent implements OnInit {
     // create map centered at St. Patrick's Church
     let mapProperties = {
       center: startLocation,
-      zoom: 11,
+      zoom: 13,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       type: [ 'street_address' ]
     };
     this.map = new google.maps.Map(this.addressMapElement.nativeElement, mapProperties);
 
     // find place; client-side validation before server for convenience, will be repeated by server
+    if(this.requestLocation.trim() === '') return;
     let service = new google.maps.places.PlacesService(this.map);
     service.nearbySearch({
       location: startLocation,
@@ -51,8 +52,10 @@ export class RequestFormComponent implements OnInit {
         let marker = new google.maps.Marker({
           position: res[0].geometry.location,
           map: this.map,
-          title: res[0].name
+          title: res[0].name,
+          label: res[0].name
         });
+        this.map.setCenter(res[0].geometry.location);
         this.errors.requestLocation = undefined;
       } else {
         this.errors.requestLocation = 'That address was not found.';
@@ -73,16 +76,6 @@ export class RequestFormComponent implements OnInit {
         this.errors = res;
       }
     });
-  }
-
-  // submit when enter pressed
-  submitOnEnter(event: KeyboardEvent) {
-    if(event.which === 13) {
-      // update map
-      this.updateMap();
-      // request
-      this.request();
-    }
   }
 
 }
