@@ -6,27 +6,98 @@
   <!-- if signed in show profile -->
   <div *ngIf='isSignedIn'>
     <h4>Profile</h4>
+
+    <!-- edit user details -->
+    <!-- TODO: turn this into a modal -->
+    <table class='table' *ngIf='changeField !== null'>
+      <tbody>
+        <tr>
+          <th scope='row'><label for='changeField'>Enter new {{ changeField }}</label></th>
+          <!-- TODO: fix type, maxlength based on input type -->
+          <td>
+            <input
+              class='form-control'
+              id='changeField'
+              name='changeFieldValue'
+              [(ngModel)]='changeFieldValue'
+              [type]='changeField === "password" ? "password" : "text"'
+              autocorrect='off'
+              autocomplete='off'
+              maxlength='256'
+              placeholder='new {{ changeField }}'>
+          </td>
+        </tr>
+        <tr *ngIf='changeField === "password"'>
+          <th scope='row'><label for='changeFieldPassword'>Enter new password again</label></th>
+          <td>
+            <input
+              class='form-control'
+              id='changeFieldPassword'
+              name='changeFieldPassword'
+              [(ngModel)]='changeFieldPassword'
+              type='password'
+              autocorrect='off'
+              autocomplete='off'
+              maxlength='256'
+              placeholder='new password again'>
+          </td>
+        </tr>
+        <tr>
+          <th scope='row'><label for='changeFieldCurrentPassword'>Enter current password</label></th>
+          <td>
+            <input
+              class='form-control'
+              id='changeFieldCurrentPassword'
+              name='changeFieldCurrentPassword'
+              [(ngModel)]='changeFieldCurrentPassword'
+              type='password'
+              autocorrect='off'
+              autocomplete='off'
+              maxlength='256'
+              placeholder='current password'>
+            </td>
+        </tr>
+        <tr>
+          <td colspan='2'><input class='btn btn-outline-danger' type='button' value='Edit {{ changeField }}'></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- user data table -->
     <table class='table'>
       <tbody>
         <tr>
           <th scope='row'>Email</th>
           <td>{{ userDetails.email }}</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <th scope='row'>Name</th>
           <td>{{ userDetails.name }}</td>
+          <td><button class='btn btn-outline-danger' (click)='edit("name")'>Edit</button></td>
         </tr>
         <tr>
           <th scope='row'>Phone</th>
           <td>{{ userDetails.phone }}</td>
+          <td><button class='btn btn-outline-danger' (click)='edit("phone")'>Edit</button></td>
         </tr>
         <tr>
           <th scope='row'>Address</th>
           <td>{{ userDetails.address }}</td>
+          <td><button class='btn btn-outline-danger' (click)='edit("address")'>Edit</button></td>
         </tr>
         <tr>
           <th scope='row'>Volunteer team</th>
           <td>{{ userDetails.team || 'None' }}</td>
+          <td>
+            <button class='btn btn-outline-danger' (click)='edit("volunteer key")' *ngIf='userDetails.team === null'>Edit</button>
+            <span *ngIf='userDetails.team !== null'>&nbsp;</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='3'>
+            <button class='btn btn-outline-danger' (click)='edit("password")'>Edit password</button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -28,10 +28,28 @@ export class HomeComponent implements OnInit {
     this.pageService.setPageTitle('Home');
     // this.pageService.getIsSignInForm().subscribe(newIsSignInForm => this.isSignInForm = newIsSignInForm);
     this.pageService.getIsSignedIn().subscribe(newIsSignedIn => this.isSignedIn = newIsSignedIn);
-    this.serverService.getUserDetails().subscribe(newUserDetails => this.userDetails = newUserDetails);
+    this.serverService.getUserDetails().subscribe(newUserDetails => {
+      this.userDetails = newUserDetails
+      this.changeField = null;
+    });
 
     // switch forms if in url
     this.activatedRoute.data.subscribe(data => this.isSignInForm = data.isSignInForm);
+  }
+
+  // change a user detail
+  public changeField: string = null;
+  public changeFieldValue: string = '';
+  public changeFieldPassword: string = '';
+  public changeFieldCurrentPassword: string = '';
+
+  // open up user detail change table
+  // TODO: working here; trigger this with new buttons
+  public edit(field: string) {
+    this.changeFieldValue = '';
+    this.changeFieldPassword = '';
+    this.changeFieldCurrentPassword = '';
+    this.changeField = field;
   }
 
   // sign out button
