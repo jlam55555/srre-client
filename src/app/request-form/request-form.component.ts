@@ -48,7 +48,7 @@ export class RequestFormComponent implements OnInit {
       keyword: this.requestLocation
     }, (res, status) => {
       if(status === google.maps.places.PlacesServiceStatus.OK && res.length > 0) {
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
           position: res[0].geometry.location,
           map: this.map,
           title: res[0].name

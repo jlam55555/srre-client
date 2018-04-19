@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageService } from '../page.service';
 import { ServerService } from '../server.service';
+import { } from '@types/googlemaps';
+declare let $: any;
 
 @Component({
   selector: 'app-request-mission',
@@ -30,7 +32,11 @@ export class RequestMissionComponent implements OnInit {
       setTimeout(() => this.missionMessagesElement.nativeElement.scrollTop = 10000, 50);
     });
 
-    // configure card  collapse indicators
+    // open map
+    this.initMap();
+    $(document).on('shown.bs.collapse', () => this.resizeMap());
+
+    // configure card collapse indicators
     this.pageService.collapseIndicators();
   }
 
@@ -42,6 +48,53 @@ export class RequestMissionComponent implements OnInit {
         this.errors = res;
       }
     });
+  }
+
+  // create map map
+  @ViewChild('directionsMap') directionsMapElement: any;
+  public map: google.maps.Map;
+  private bounds: google.maps.LatLngBounds = new google.maps.LatLngBounds();
+  initMap() {
+
+    // coordinates for St. Patrick's Church
+    var startLocation = new google.maps.LatLng(41.3072523, -73.3477574);
+
+    // create map centered at St. Patrick's Church
+    let mapProperties = {
+      center: startLocation,
+      zoom: 11,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      type: [ 'street_address' ]
+    };
+    this.map = new google.maps.Map(this.directionsMapElement.nativeElement, mapProperties);
+
+    // find places, mark on map
+    let service = new google.maps.places.PlacesService(this.map);
+    let markers: google.maps.Marker[] = [];
+    let searchPlaceCallback = (res, status) => {
+      new google.maps.Marker({
+        position: res[0].geometry.location,
+        map: this.map,
+        title: res[0].name,
+        label: res[0].name
+      });
+      this.bounds.extend(res[0].geometry.location);
+    };
+    let placeNames = [ this.mission.startplace, this.mission.endplace, this.mission.meetingplace ];
+    for(let placeName of placeNames) {
+      service.nearbySearch({
+        location: startLocation,
+        radius: 25000,  // approximately 15 miles
+        keyword: placeName
+      }, searchPlaceCallback);
+    }
+  }
+
+  // update  after resize
+  resizeMap() {
+    console.log('test');
+    this.map.fitBounds(this.bounds);
+    this.map.setCenter(this.bounds.getCenter());
   }
 
   // get messages
