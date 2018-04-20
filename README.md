@@ -52,6 +52,7 @@ Here are the major features going into development next (in order):
 - Add start time, drivee phone number to missions
 - Allow mass dumping of information for official records
 - Show when users are on-duty
+- Add linkable stops on about page for convenience
 - Minor bug handling
 - Potential PANIC button?
 
