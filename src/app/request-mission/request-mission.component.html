@@ -1,128 +1,133 @@
-<!-- already contained within .container, no need to wrap in one -->
-
 <!-- message and involved people -->
-<div class='jumbotron my-2'>
-  <h4>Request message:</h4>
-  <p>{{ mission.situation || 'No message was given by the ride requester.' }}</p>
-  <table class='table'>
-    <tbody>
-      <tr>
-        <th for='row'>Requester</th>
-        <td>{{ mission.drivee }}</td>
-      </tr>
-      <tr>
-        <th for='row'>Driver 1</th>
-        <td>{{ mission.driver1 || 'Not selected yet' }}</td>
-      </tr>
-      <tr>
-        <th for='row'>Driver 2</th>
-        <td>{{ mission.driver2 || 'Not selected yet' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class='jumbotron jumbotron-fluid' id='missionBrief'>
+  <div class='container'>
+    <h4>Request message:</h4>
+    <p>{{ mission.situation || 'No message was given by the ride requester.' }}</p>
+    <table class='table table-sm'>
+      <tbody>
+        <tr>
+          <th for='row'>Requester</th>
+          <td>{{ mission.drivee }}</td>
+        </tr>
+        <tr>
+          <th for='row'>Volunteer 1</th>
+          <td>{{ mission.driver1 || 'Not selected yet' }}</td>
+        </tr>
+        <tr>
+          <th for='row'>Volunteer 2</th>
+          <td>{{ mission.driver2 || 'Not selected yet' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<!-- errors -->
-<div class='text-danger'>{{ errors.mission }}</div>
+<div class='container'>
+  <!-- errors -->
+  <div class='text-danger'>{{ errors.mission }}</div>
 
-<!-- flexbox for positioning -->
-<!-- add when volunteering possible: *ngIf='mission.driver1 !== null && mission.driver2 !== null' -->
-<div class='row'>
-
-  <!-- times -->
-  <div class='col-xl-4'>
-    <div class='card my-2'>
-      <div class='card-header bg-secondary'>
-        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionTimesCollapse'>Times</a>
-      </div>
-      <div class='collapse' id='missionTimesCollapse'>
-        <ul class='list-group list-group-fluid'>
-
-          <!-- repeat for every waypoint -->
-          <li class='list-group-item text-center' *ngFor='let w of mission.waypoints'>
-
-            <!-- icon for waypoint -->
-            <h4><i [ngClass]='{ "fas p-1 text-white rounded-circle": true, "bg-success fa-check": w.time !== null, "bg-info fa-car": w.next, "bg-danger fa-clock": w.time === null && !w.next }'></i></h4>
-
-            <!-- description text of waypoint -->
-            <p>{{ w.text }}</p>
-
-            <!-- address of waypoint and time if completed -->
-            <p class='text-secondary small'>
-              {{ w.place }}
-              <span *ngIf='w.time !== null'>
-                <br>Time completed: {{ w.time | date:'shortTime' }}
-              </span>
-            </p>
-
-            <!-- button to confirm if you can confirm and if this is next option -->
-            <button class='btn btn-outline-info' *ngIf='w.next && w.isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
-          </li>
-        </ul>
-      </div>
-
-      <!-- footer shows next stop and confirm button if applicable -->
-      <div class='card-footer text-center'>
-        <h6>Next stop</h6>
-
-        <!-- description text -->
-        <p>{{ mission.waypoints[mission.nextId].text }}</p>
-
-        <!-- button to confirm if you can confirm and if this is next option -->
-        <button class='btn btn-outline-info' *ngIf='mission.waypoints[mission.nextId].next && mission.waypoints[mission.nextId].isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
-      </div>
-    </div>
+  <div *ngIf='mission.driver2 === null'>
+    <p>Checkpoint times will show when two volunteers are selected.</p>
   </div>
 
-  <!-- directions and map -->
-  <div class='col-xl-4 col-md-6'>
-    <div class='card my-2'>
-      <div class='card-header bg-secondary'>
-        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionDirectionsCollapse'>Directions</a>
-      </div>
-      <div class='collapse' id='missionDirectionsCollapse'>
-        <div class='card-body p-0'>
-          <div class='jumbotron jumbotron-fluid m-0' #directionsMap></div>
+  <!-- flexbox for positioning -->
+  <div class='row'>
+
+    <!-- times -->
+    <div class='col-xl-4' *ngIf='mission.driver2 !== null'>
+      <div class='card my-2'>
+        <div class='card-header bg-secondary'>
+          <a class='text-white' href='#' data-toggle='collapse' data-target='#missionTimesCollapse'>Times</a>
+        </div>
+        <div class='collapse' id='missionTimesCollapse'>
+          <ul class='list-group list-group-fluid'>
+
+            <!-- repeat for every waypoint -->
+            <li class='list-group-item text-center' *ngFor='let w of mission.waypoints'>
+
+              <!-- icon for waypoint -->
+              <h4><i [ngClass]='{ "fas p-1 text-white rounded-circle": true, "bg-success fa-check": w.time !== null, "bg-info fa-car": w.next, "bg-danger fa-clock": w.time === null && !w.next }'></i></h4>
+
+              <!-- description text of waypoint -->
+              <p>{{ w.text }}</p>
+
+              <!-- address of waypoint and time if completed -->
+              <p class='text-secondary small'>
+                {{ w.place }}
+                <span *ngIf='w.time !== null'>
+                  <br>Time completed: {{ w.time | date:'shortTime' }}
+                </span>
+              </p>
+
+              <!-- button to confirm if you can confirm and if this is next option -->
+              <button class='btn btn-outline-info' *ngIf='w.next && w.isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- footer shows next stop and confirm button if applicable -->
+        <div class='card-footer text-center'>
+          <h6>Next stop</h6>
+
+          <!-- description text -->
+          <p>{{ mission.waypoints[mission.nextId].text }}</p>
+
+          <!-- button to confirm if you can confirm and if this is next option -->
+          <button class='btn btn-outline-info' *ngIf='mission.waypoints[mission.nextId].next && mission.waypoints[mission.nextId].isConfirmRole' (click)='completeCheckpoint()'>Done!</button>
         </div>
       </div>
-      <div class='card-footer'>
-        <a target='_blank' href='{{ mission.url }}'>Google Maps directions</a>
-      </div>
     </div>
-  </div>
 
-  <!-- chat -->
-  <div class='col-xl-4 col-md-6'>
-    <div class='card my-2'>
-      <div class='card-header bg-secondary'>
-        <a class='text-white' href='#' data-toggle='collapse' data-target='#missionChatCollapse'>Chat</a>
-      </div>
-      <div class='collapse' id='missionChatCollapse'>
-        <ul class='list-group list-group-fluid' id='missionMessages' #missionMessages>
-          <p class='m-3 text-center' *ngIf='messages.length === 0'>No messages have been sent yet.</p>
-          <li class='list-group-item' *ngFor='let message of messages'>
-            <small class='d-block text-secondary'>{{ message.author }} - {{ message.time | date:'shortTime' }}</small>
-            <div>{{ message.content }}</div>
-          </li>
-        </ul>
-        <div class='row mx-0'>
-          <input
-            class='col-9 rounded-0'
-            type='text'
-            maxlength='500'
-            autocomplete='off'
-            autocorrect='off'
-            placeholder='Send a message...'
-            name='missionMessage'
-            [(ngModel)]='missionMessage'
-            (keydown)='submitOnEnter($event)' />
-          <input class='btn btn-outline-primary col-3 rounded-0' type='button' value='Send' (click)='sendMessage()'>
+    <!-- directions and map -->
+    <div class='col-xl-4 col-md-6'>
+      <div class='card my-2'>
+        <div class='card-header bg-secondary'>
+          <a class='text-white' href='#' data-toggle='collapse' data-target='#missionDirectionsCollapse'>Directions</a>
+        </div>
+        <div class='collapse' id='missionDirectionsCollapse'>
+          <div class='card-body p-0'>
+            <div class='jumbotron jumbotron-fluid m-0' #directionsMap></div>
+          </div>
+        </div>
+        <div class='card-footer'>
+          <a target='_blank' href='{{ mission.url }}'>Google Maps directions</a>
         </div>
       </div>
-      <div class='card-footer'>
-        Make sure never to use your phone while driving.
+    </div>
+
+    <!-- chat -->
+    <div class='col-xl-4 col-md-6'>
+      <div class='card my-2'>
+        <div class='card-header bg-secondary'>
+          <a class='text-white' href='#' data-toggle='collapse' data-target='#missionChatCollapse'>Chat</a>
+        </div>
+        <div class='collapse' id='missionChatCollapse'>
+          <ul class='list-group list-group-fluid' id='missionMessages' #missionMessages>
+            <p class='m-3 text-center' *ngIf='messages.length === 0'>No messages have been sent yet.</p>
+            <li class='list-group-item' *ngFor='let message of messages'>
+              <small class='d-block text-secondary'>{{ message.author }} - {{ message.time | date:'shortTime' }}</small>
+              <div>{{ message.content }}</div>
+            </li>
+          </ul>
+          <div class='row mx-0'>
+            <input
+              class='col-9 rounded-0'
+              type='text'
+              maxlength='500'
+              autocomplete='off'
+              autocorrect='off'
+              placeholder='Send a message...'
+              name='missionMessage'
+              [(ngModel)]='missionMessage'
+              (keydown)='submitOnEnter($event)' />
+            <input class='btn btn-outline-primary col-3 rounded-0' type='button' value='Send' (click)='sendMessage()'>
+          </div>
+        </div>
+        <div class='card-footer'>
+          Make sure never to use your phone while driving.
+        </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>

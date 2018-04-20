@@ -1,19 +1,15 @@
-<div class='container'>
+<!-- if signed in -->
+<div *ngIf='isSignedIn'>
 
-  <!-- if signed in -->
-  <div *ngIf='isSignedIn'>
+  <!-- if mission, mission page -->
+  <app-request-mission *ngIf='mission.id !== undefined'></app-request-mission>
 
-    <!-- if mission, mission page -->
-    <app-request-mission *ngIf='mission.id !== undefined'></app-request-mission>
+  <!-- if no mission, request page -->
+  <app-request-form *ngIf='mission.id === undefined'></app-request-form>
 
-    <!-- if no mission, request page -->
-    <app-request-form *ngIf='mission.id === undefined'></app-request-form>
+</div>
 
-  </div>
-
-  <!-- if not signed in -->
-  <div *ngIf='!isSignedIn'>
-    <p>You must <a routerLink='/signin'>sign in</a> or <a routerLink='/signup'>sign up</a> to request a ride.</p>
-  </div>
-
+<!-- if not signed in -->
+<div class='container' *ngIf='!isSignedIn'>
+  <p>You must <a routerLink='/signin'>sign in</a> or <a routerLink='/signup'>sign up</a> to request a ride.</p>
 </div>

@@ -21,7 +21,10 @@ export class RequestMissionComponent implements OnInit {
 
   ngOnInit() {
     // get mission data
-    this.serverService.getMissionData().subscribe(missionData => this.mission = missionData);
+    this.serverService.getMissionData().subscribe(missionData => {
+      this.mission = missionData;
+      this.pageService.initCollapseIndicators();
+    });
 
     // get mission message data
     this.serverService.getMessages().subscribe(newMessages => {
@@ -92,7 +95,6 @@ export class RequestMissionComponent implements OnInit {
 
   // update  after resize
   resizeMap() {
-    console.log('test');
     this.map.fitBounds(this.bounds);
     this.map.setCenter(this.bounds.getCenter());
   }
