@@ -76,8 +76,17 @@ export class HomeComponent implements OnInit {
         // if successful, clear and hide
         this.edit(null);
         $(this.editModalElement.nativeElement).modal('hide');
+        // update user data
+        this.serverService.getUserDetails();
       } else {
+        // set errors
         this.errors = res;
+        // clear all password fields
+        this.changeFieldCurrentPassword = '';
+        if(this.changeField === 'password') {
+          this.changeFieldValue = '';
+          this.changeFieldPassword = '';
+        }
       }
     });
   }
