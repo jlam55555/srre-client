@@ -7,6 +7,9 @@
   <div *ngIf='isSignedIn'>
     <h4>Profile</h4>
 
+    <!-- another news alert for logged in users; manual update -->
+    <div class='alert alert-danger'><strong>Security update:</strong> If you signed up before 4/17/18, change your password. More details <a routerLink='/about'>here</a>.</div>
+
     <!-- edit user details -->
     <div class='modal' id='editModal' tabindex='-1' role='dialog' #editModal>
       <div class='modal-dialog' role='document'>
@@ -96,7 +99,7 @@
             <th scope='row'>Volunteer team</th>
             <td>{{ userDetails.team || 'None' }}</td>
             <td>
-              <button class='btn btn-outline-danger' (click)='edit("volunteer key")' *ngIf='userDetails.team === null' data-toggle='modal' data-target='#editModal'>Edit</button>
+              <button class='btn btn-outline-danger' (click)='edit("volunteer key")' *ngIf='userDetails.team === null' data-toggle='modal' data-target='#editModal'>Use a key</button>
               <span *ngIf='userDetails.team !== null'>&nbsp;</span>
             </td>
           </tr>
