@@ -23,6 +23,8 @@
                 <thead>
                   <tr>
                     <th class='text-nowrap' scope='col' rowspan='2'>Requester</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>Phone Number</th>
+                    <th class='text-nowrap' scope='col' rowspan='2'>School</th>
                     <th class='text-nowrap' scope='col' rowspan='2'>Pick up address</th>
                     <th class='text-nowrap' scope='col' rowspan='2'>Home address</th>
                     <th class='text-nowrap' scope='col' rowspan='2'>Situation</th>
@@ -44,6 +46,8 @@
                   </tr>
                   <tr *ngFor='let mission of missions.onDuty'>
                     <td>{{ mission.drivee }}</td>
+                    <td>{{ mission.phone }}</td>
+                    <td>{{ mission.school || 'Joel Barlow High School' }}</td>
                     <td>{{ mission.startplace }}</td>
                     <td>{{ mission.endplace }}</td>
                     <td>{{ mission.situation || 'No request situation was given.' }}</td>

@@ -20,25 +20,35 @@
     <div class='form-group'>
       <small class='form-text'>Please confirm that the location found is correct using the map below.</small>
       <div class='jumbotron jumbotron-fluid' #addressMap></div>
+      <small class='form-text text-secondary'>If the address is not in Redding or Easton, Safe Rides may not be able to retrieve you.</small>
     </div>
     <div class='form-group'>
       <label class='control-label' for='requestMessage'>Describe your situation to Safe Rides volunteers <small class='text-secondary'>(optional)</small></label>
-      <input
+      <textarea
         class='form-control'
         type='text'
         maxlength='500'
+        rows='5'
         placeholder='I feel unsafe and would like a safe, confidential ride home.'
         id='requestMessage'
         name='requestMessage'
-        [(ngModel)]='requestMessage'>
-      <small class='form-text text-secondary'>Leave a short blurb here to help the volunteers understand your general situation.</small>
+        [(ngModel)]='requestMessage'></textarea>
+      <small class='form-text text-secondary'>If there are any special circumstances or more than one person in the call, enter it here. If the destination is not your home address (the default), state it here.</small>
     </div>
     <div class='form-group'>
-      <input
-        class='btn btn-outline-primary'
+      <h4>Statements:</h4>
+      <ul>
+        <li>The Safe Rides volunteer team will call your phone number if any of the information provided is suspect or unclear, or if any problems or changes occur.</li>
+        <li>Please make sure you dispose of any illegal substances (including alcohol) before you get into the Safe Rides car. (All bags must go in the trunk.)</li>
+        <li>If you find another ride, you <em>must</em> call us back to cancel.</li>
+        <li>Your phone number and home address are necesarily visible to volunteers.</li>
+      </ul>
+      <button
+        class='btn btn-outline-primary d-block mx-auto'
         type='button'
-        value='Request a Safe Ride'
         (click)='request()'>
+        I understand these statements.<br>Request a Safe Ride.
+      </button>
     </div>
   </form>
 </div>

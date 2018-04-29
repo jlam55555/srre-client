@@ -10,6 +10,22 @@
           <td>{{ mission.drivee }}</td>
         </tr>
         <tr>
+          <th for='row'>Requester phone number</th>
+          <td>{{ mission.phone }}</td>
+        </tr>
+        <tr>
+          <th for='row'>Requester school</th>
+          <td>{{ mission.school || 'Joel Barlow High School' }}</td>
+        </tr>
+        <tr>
+          <th for='row'>Pick up location</th>
+          <td>{{ mission.startplace }}</td>
+        </tr>
+        <tr>
+          <th for='row'>Drop off location<br><small class='font-weight-normal text-secondary'>(unless otherwise specified)</small></th>
+          <td>{{ mission.endplace }}</td>
+        </tr>
+        <tr>
           <th for='row'>Volunteer 1</th>
           <td>{{ mission.driver1 || 'Not selected yet' }}</td>
         </tr>
