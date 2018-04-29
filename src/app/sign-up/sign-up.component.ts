@@ -23,6 +23,7 @@ export class SignUpComponent implements OnInit {
   public signUpPassword2: string = '';
   public signUpName: string = '';
   public signUpPhone: string = '';
+  public signUpSchool: string = '';
   public signUpAddress: string = '';
   public signUpVolunteerKey: string = '';
 
@@ -40,6 +41,7 @@ export class SignUpComponent implements OnInit {
       password2: this.signUpPassword2,
       name: this.signUpName,
       phone: this.signUpPhone,
+      school: this.signUpSchool,
       address: this.signUpAddress,
       volunteerKey: this.signUpVolunteerKey
     };
@@ -65,6 +67,4 @@ export class SignUpComponent implements OnInit {
       this.signUp();
     }
   }
-
-
 }

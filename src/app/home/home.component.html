@@ -91,6 +91,11 @@
             <td><button class='btn btn-outline-danger' (click)='edit("phone number")' data-toggle='modal' data-target='#editModal'>Edit</button></td>
           </tr>
           <tr>
+            <th scope='row'>School</th>
+            <td>{{ userDetails.school || 'Joel Barlow High School' }}</td>
+            <td><button class='btn btn-outline-danger' (click)='edit("school")' data-toggle='modal' data-target='#editModal'>Edit</button></td>
+          </tr>
+          <tr>
             <th scope='row'>Address</th>
             <td>{{ userDetails.address }}</td>
             <td><button class='btn btn-outline-danger' (click)='edit("address")' data-toggle='modal' data-target='#editModal'>Edit</button></td>

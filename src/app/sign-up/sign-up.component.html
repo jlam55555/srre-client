@@ -73,6 +73,21 @@
     <small class='form-text invalid-feedback'>{{ errors.signUpPhone }}</small>
   </div>
   <div class='form-group'>
+    <label class='control-label' for='signUpSchool'>School (if not JBHS)</label>
+    <small class='form-text'>Enter your school name if you do not attend JBHS. You may leave it blank if you are a JBHS student.</small>
+    <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpSchool !== undefined }'
+      type='text'
+      placeholder=''
+      maxlength='64'
+      autocomplete='off'
+      autocorrect='off'
+      id='signUpSchool'
+      name='signUpSchool'
+      [(ngModel)]='signUpSchool'
+      (keydown)='submitOnEnter($event)'>
+    <small class='form-text invalid-feedback'>{{ errors.signUpSchool }}</small>
+  </div>
+  <div class='form-group'>
     <label class='control-label' for='signUpAddress'>Home address</label>
     <input [ngClass]='{ "form-control": true, "is-invalid": errors.signUpAddress !== undefined }'
       type='text'
