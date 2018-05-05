@@ -102,7 +102,10 @@
           </tr>
           <tr>
             <th scope='row'>Volunteer team</th>
-            <td>{{ userDetails.team || 'None' }}</td>
+            <td>
+              {{ userDetails.team || 'None' }}
+              {{ userDetails.team !== null ? '(' + (userDetails.onDuty ? 'on duty' : 'off duty') + ')' : '' }}
+            </td>
             <td>
               <button class='btn btn-outline-danger' (click)='edit("volunteer key")' *ngIf='userDetails.team === null' data-toggle='modal' data-target='#editModal'>Use a key</button>
               <span *ngIf='userDetails.team !== null'>&nbsp;</span>

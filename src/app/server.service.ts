@@ -52,7 +52,7 @@ export class ServerService {
   }
 
   // get mission list data; event handler to update missionListData in constructor
-  public missionListDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({ onDuty: [], offDuty: [] });
+  public missionListDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>({ onDuty: [], offDuty: [], first: true });
   public getMissionListData(): BehaviorSubject<any> {
     this.socket.emit('getMissionListData');
     return this.missionListDataSubject;

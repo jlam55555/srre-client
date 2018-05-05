@@ -37,7 +37,25 @@ export class VolunteerComponent implements OnInit {
       this.isVolunteer = newUserDetails.team !== null;
       this.pageService.initCollapseIndicators();
     });
-    this.serverService.getMissionListData().subscribe(newMissionListData => this.missions = newMissionListData);
+
+    // audio notification
+    const notificationAudio = new Audio('/assets/notification.mp3');
+    let isFirst = true;
+
+    this.serverService.getMissionListData().subscribe(newMissionListData => {
+      if(newMissionListData.first !== true) {
+        if(isFirst) {
+          isFirst = false;
+        } else {
+          // set notification sound if new mission
+          if(this.missions.onDuty.length < newMissionListData.onDuty.length) {
+            notificationAudio.play();
+          }
+        }
+      }
+
+      this.missions = newMissionListData;
+    });
 
     // get duty dates -- static data
     this.serverService.getDutyDates(res => {
